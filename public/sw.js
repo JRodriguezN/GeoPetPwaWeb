@@ -1,14 +1,14 @@
-const staticCacheName  = "pwa-v" + new Date().getTime();
+const staticCacheName = "pwa-v" + new Date().getTime();
 const filesToCache = [
-  '/manifest.json',
-  '/js/pwa.js',
-  '/images/boceto/ic_3_48.png',
-  '/images/boceto/ic_3_72.png',
-  '/images/boceto/ic_3_96.png',
-  '/images/boceto/ic_3_144.png',
-  '/images/boceto/ic_3_192.png',
-  '/offline',             // Página offline genérica
-  '/mascotas_offline'     
+    '/manifest.json',
+    '/js/pwa.js',
+    '/images/boceto/ic_3_48.png',
+    '/images/boceto/ic_3_72.png',
+    '/images/boceto/ic_3_96.png',
+    '/images/boceto/ic_3_144.png',
+    '/images/boceto/ic_3_192.png',
+    '/offline',             // Página offline genérica
+    '/mascotas_offline',
 ];
 
 // Instalacion de cache
@@ -55,6 +55,10 @@ self.addEventListener('activate', event => {
 
 // Serve from Cache
 self.addEventListener("fetch", event => {
+    if (event.request.method !== 'GET') {
+        return;
+    }
+    
     // Solo interceptamos la ruta de mascotas
     if (event.request.url.includes('/mis-mascotas')) {
         event.respondWith(

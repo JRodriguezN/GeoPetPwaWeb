@@ -14,7 +14,7 @@ class PetsController extends Controller{
     public function index(){
        // Conecta con Firebase usando tu archivo JSON
                $projectId ='petsai-f7484';
-        $apiKey = 'AIzaSyB3Wtj_WE-2X91AT1YEZApNDh76wNUGfcw';
+        $apiKey = env('FIREBASE_API_KEY');
 
         // Nombre de tu colección
         $collection = 'mascotas';
