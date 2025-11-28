@@ -34,5 +34,21 @@ Route::get('/mascotas_offline', function () {
     return view('pets.offline');
 });
 
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+});
+
+Route::get('/metrics', function () {
+    // Simula métricas estilo Prometheus
+    return response("app_requests_total 42\napp_errors_total 0", 200)
+        ->header('Content-Type', 'text/plain');
+});
+
+Route::get('/logs/latest', function () {
+    return response()->json([
+        ['timestamp' => now(), 'level' => 'INFO', 'message' => 'Todo bien'],
+        ['timestamp' => now(), 'level' => 'ERROR', 'message' => 'Algo falló']
+    ]);
+});
 
 require __DIR__.'/auth.php';
